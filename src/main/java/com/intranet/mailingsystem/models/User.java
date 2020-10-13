@@ -1,27 +1,31 @@
 package com.intranet.mailingsystem.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user_collection")
 public class User {
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
+
     @Id
-    private String _id;
+    private long id;
     private String email;
     private String alternateEmail;
     private String firstName;
     private String lastName;
     private String password;
-    private int phone;
+    private long phone;
 //    private String birthdate;
     private String corporationName;
 
-    public String get_id() {
-        return _id;
+    public long getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -64,11 +68,11 @@ public class User {
         this.password = password;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 

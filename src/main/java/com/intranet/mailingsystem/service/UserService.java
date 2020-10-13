@@ -31,4 +31,10 @@ public class UserService {
         query.addCriteria(Criteria.where("email").is(email));
         return mongoTemplate.findOne(query, User.class);
     }
+
+    public User getUserById(String userId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(userId));
+        return mongoTemplate.findOne(query, User.class);
+    }
 }

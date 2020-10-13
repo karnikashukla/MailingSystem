@@ -33,7 +33,6 @@ public class UserRegistrationController {
     @PostMapping("/registration")
     public String doUserRegistration(@ModelAttribute("userRegistration") User user,ModelMap modelMap) {
         if(userService.getUserByEmail(user.getEmail()) == null){
-            user.set_id(user.getEmail());
             userService.save(user);
             return "redirect:/users/login";
         }

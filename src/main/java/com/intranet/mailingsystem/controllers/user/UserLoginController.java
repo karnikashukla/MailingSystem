@@ -33,7 +33,7 @@ public class UserLoginController {
                 User user = userService.getUserByEmail(loginModel.getEmail());
 
                 if(user.getPassword().equals(loginModel.getPassword())){
-                    session.setAttribute("userId", user.get_id());
+                    session.setAttribute("userId", user.getId());
                     System.out.println("Password match");
                     return "redirect:/users/inbox";
                 }
