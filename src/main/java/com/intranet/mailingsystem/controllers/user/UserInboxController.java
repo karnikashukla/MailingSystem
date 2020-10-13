@@ -14,8 +14,20 @@ public class UserInboxController {
     @GetMapping("/inbox")
     public String displayInbox(ModelMap modelMap, HttpSession session){
 
+        if (session.getAttribute("userId") != null){
+            return "inbox";
+        }
+        else {
+            return "redirect:/users/login";
+        }
         //service api of retriving particular user's inbox mail
         //sending list of MailModel to frontend.
-        return "inbox";
+
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("userId");
+        return "redirect:/users/login";
     }
 }

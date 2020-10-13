@@ -32,8 +32,15 @@ public class UserRegistrationController {
 
     @PostMapping("/registration")
     public String doUserRegistration(@ModelAttribute("userRegistration") User user,ModelMap modelMap) {
-        user.set_id(user.getEmail());
-        userService.save(user);
-        return "redirect:/users/login";
+        if(userService.getUserByEmail(user.getEmail()) == null){
+            user.set_id(user.getEmail());
+            userService.save(user);
+            return "redirect:/users/login";
+        }
+        else{
+            modelMap.addAttribute("registerError","email already exists. please try login.");
+            return "user_reg";
+        }
+
     }
 }

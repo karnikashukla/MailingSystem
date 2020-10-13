@@ -30,8 +30,8 @@ public class AdminLoginController {
     @PostMapping("/login")
     public String doAdminLogin(@ModelAttribute("adminLogin") Admin admin, HttpSession session, ModelMap modelMap){
        String loginError = "Email or Password invalid.";
-       if(adminService.getUserById(admin.getEmail()) != null){
-           Admin admin1 = adminService.getUserById(admin.getEmail());
+       if(adminService.getAdminByEmail(admin.getEmail()) != null){
+           Admin admin1 = adminService.getAdminByEmail(admin.getEmail());
            if(admin1.getPassword().equals(admin.getPassword())){
                return "redirect:/admin/dashboard";
            }

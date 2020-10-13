@@ -2,7 +2,6 @@ package com.intranet.mailingsystem.service;
 
 import com.intranet.mailingsystem.models.Mail;
 import com.intranet.mailingsystem.models.User;
-import com.intranet.mailingsystem.repositories.AdminRepository;
 import com.intranet.mailingsystem.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -13,22 +12,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class MailService {
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    @Autowired
-    UserRepository userRepository;
-
-
-    public void save(User user){
-        userRepository.insert(user);
+    public List<Mail> findAllMailsOfUser(String userEmail){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("toMail").is(userEmail));
+        return mongoTemplate.find(query, Mail.class);
     }
 
-
-    public User getUserByEmail(String email) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("email").is(email));
-        return mongoTemplate.findOne(query, User.class);
+    public void save(Mail mail){
+        mongoTemplate.insert(mail);
     }
 }

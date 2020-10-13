@@ -65,8 +65,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <h2 class="title1">Login</h2>
             <div class="widget-shadow">
                 <div class="login-body">
-                    <form th:action="@{/users/login}" th:object="${userLogin}" method="post">
-                        <input type="email" th:field="*{email}" class="user" name="email" placeholder="Enter Your Email" required="">
+                    <form action="/users/login" th:object="${userLogin}" method="post">
+                        <input type="email" th:field="*{email}" name="email" placeholder="Enter Your Email" required="">
                         <input type="password" th:field="*{password}" name="password" class="lock" placeholder="Password" required="">
                         <div class="forgot-grid">
 

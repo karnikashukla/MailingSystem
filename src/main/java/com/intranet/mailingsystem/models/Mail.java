@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Mail {
     @Id
     private Integer mailId;
+
     private String toMail;
     private String fromMail;
     private String subject;
@@ -59,5 +60,12 @@ public class Mail {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Mail() {
+    }
+
+    public Mail(String fromMail) {
+        this.fromMail = fromMail;
     }
 }

@@ -2,15 +2,6 @@ package com.intranet.mailingsystem.models;
 
 
 public class LoginModel {
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     private String email;
     private String password;

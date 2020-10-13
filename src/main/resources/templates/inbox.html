@@ -5,7 +5,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Glance Design Dashboard an Admin Panel Category Flat Bootstrap Responsive Website Template | Inbox :: w3layouts</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,8 +67,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 <i class="fa fa-envelope"></i> <span>Mailbox</span>
                 <i class="fa fa-angle-left pull-right"></i></a>
                <ul class="treeview-menu">
-                  <li><a href="/"><i class="fa fa-angle-right"></i> Mail Inbox</a></li>
-                  <li><a href="/compose"><i class="fa fa-angle-right"></i> Compose Mail </a></li>
+                  <li><a href="/users/inbox"><i class="fa fa-angle-right"></i> Mail Inbox</a></li>
+                  <li><a href="/users/compose"><i class="fa fa-angle-right"></i> Compose Mail </a></li>
                 </ul>
               </li>
 				<li class="treeview">
@@ -133,7 +133,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							</a>
 							<ul class="dropdown-menu drp-mnu">
 								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li> 
-								<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+								<li> <a href="/users/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							</ul>
 						</li>
 					</ul>
@@ -155,7 +155,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="inbox-page">
 					<h4>Today</h4>
-					<div class="inbox-row widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
+<!--					<span th:if="${mailError==null}">-->
+						<div class="inbox-row widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
 <!--						<div class="mail "> <input type="checkbox" class="checkbox"> </div>-->
 
 						<div class="mail mail-name"> <h6>Alexander</h6> </div>
@@ -201,7 +202,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 					</div>
-
+					</span>
 				</div>
 
 						

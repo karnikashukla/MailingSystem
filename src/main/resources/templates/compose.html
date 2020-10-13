@@ -5,7 +5,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Glance Design Dashboard an Admin Panel Category Flat Bootstrap Responsive Website Template | Compose mail :: w3layouts</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,31 +15,31 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 <!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
 
 <!-- Custom CSS -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="/css/style.css" rel='stylesheet' type='text/css' />
 
 <!-- font-awesome icons CSS -->
-<link href="css/font-awesome.css" rel="stylesheet"> 
+<link href="/css/font-awesome.css" rel="stylesheet">
 <!-- //font-awesome icons CSS -->
 
  <!-- side nav css file -->
- <link href='css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css'/>
+ <link href='/css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css'/>
  <!-- side nav css file -->
  
  <!-- js-->
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/modernizr.custom.js"></script>
+<script src="/js/jquery-1.11.1.min.js"></script>
+<script src="/js/modernizr.custom.js"></script>
 
 <!--webfonts-->
 <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
 <!--//webfonts--> 
 
 <!-- Metis Menu -->
-<script src="js/metisMenu.min.js"></script>
-<script src="js/custom.js"></script>
-<link href="css/custom.css" rel="stylesheet">
+<script src="/js/metisMenu.min.js"></script>
+<script src="/js/custom.js"></script>
+<link href="/css/custom.css" rel="stylesheet">
 <!--//Metis Menu -->
 
 </head> 
@@ -132,7 +132,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							</a>
 							<ul class="dropdown-menu drp-mnu">
 								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li> 
-								<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+								<li> <a href="/users/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							</ul>
 						</li>
 					</ul>
@@ -156,10 +156,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<div class="alert alert-info">
 								Please fill details to send a new message
 							</div>
-							<form class="com-mail">
-								<input type="text" class="form-control1 control3" placeholder="To :">
-								<input type="text" class="form-control1 control3" placeholder="Subject :">
-								<textarea rows="6" class="form-control1 control2" placeholder="Message :" ></textarea>
+							<form class="com-mail" th:object="${compose}" method="post" action="#">
+								<input type="text" th:field="*{toMail}" class="form-control1 control3" placeholder="To :">
+								<input type="text" class="form-control1 control3" th:placeholder="'From :' + ${fromMail}" disabled>
+								<input type="text" th:field="*{subject}" class="form-control1 control3" placeholder="Subject :">
+								<textarea rows="6" th:field="*{body}" class="form-control1 control2" placeholder="Message :" ></textarea>
 								<div class="form-group">
 									<div class="btn btn-default btn-file">
 										<i class="fa fa-paperclip"></i> Attachment
@@ -179,14 +180,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	</div>
 	
 	<!-- side nav js -->
-	<script src='js/SidebarNav.min.js' type='text/javascript'></script>
+	<script src='/js/SidebarNav.min.js' type='text/javascript'></script>
 	<script>
       $('.sidebar-menu').SidebarNav()
     </script>
 	<!-- //side nav js -->
 	
 	<!-- Classie --><!-- for toggle left push menu script -->
-		<script src="js/classie.js"></script>
+		<script src="/js/classie.js"></script>
 		<script>
 			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
 				showLeftPush = document.getElementById( 'showLeftPush' ),
@@ -208,12 +209,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<!-- //Classie --><!-- //for toggle left push menu script -->
 		
 	<!--scrolling js-->
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
+	<script src="/js/jquery.nicescroll.js"></script>
+	<script src="/js/scripts.js"></script>
 	<!--//scrolling js-->
 	
 	<!-- Bootstrap Core JavaScript -->
-   <script src="js/bootstrap.js"> </script>
+   <script src="/js/bootstrap.js"> </script>
    
 </body>
 </html>

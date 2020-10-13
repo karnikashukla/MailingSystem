@@ -26,7 +26,7 @@ public class AdminService {
     }
 
 
-    public Admin getUserById(String email) {
+    public Admin getAdminByEmail(String email) {
         Query query = new Query();
         query.addCriteria(Criteria.where("email").is(email));
         return mongoTemplate.findOne(query, Admin.class);
