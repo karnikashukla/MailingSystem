@@ -7,13 +7,13 @@ import com.intranet.mailingsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -45,12 +45,9 @@ public class UserComposeController {
 
     }
 
-    @PostMapping("/compose")
-    public String sendEmail(@Valid @ModelAttribute("compose") Mail mail, HttpSession session, @RequestParam("documents") MultipartFile documents, BindingResult bindingResult, ModelMap modelMap) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("ERROR in user Form");
-            return "compose";
-        }
+    @RequestMapping(value = "/compose", consumes = {"multipart/form-data"},method = RequestMethod.POST)
+    public String sendEmail(@Valid @ModelAttribute("compose") Mail mail, HttpSession session, ModelMap modelMap, @RequestParam(value = "file")MultipartFile[] multipartFiles) {
+
 
         long id = (long) session.getAttribute("userId");
 
@@ -66,33 +63,33 @@ public class UserComposeController {
         Matcher fromMailMatcher = emailFinder.matcher(fromMail);
 
         String UPLOADED_FOLDER = "E://Intranet";
+        List<String> tempFileNames = new ArrayList<String>();
 
-        List<String> tempFileNames = null;
         File dir = new File(UPLOADED_FOLDER);
-//        for (int i = 0; i < documents.length; i++) {
-        MultipartFile file = documents;
-        //tempFileNames.add(file.getOriginalFilename());
-        try {
-            byte[] bytes = file.getBytes();
+        for (int i = 0; i < multipartFiles.length; i++) {
+            MultipartFile file = multipartFiles[i];
+            tempFileNames.add(file.getOriginalFilename());
+            try {
+                byte[] bytes = file.getBytes();
 
-            if (!dir.exists())
-                dir.mkdirs();
+                if (!dir.exists())
+                    dir.mkdirs();
 
-            File uploadFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
-            BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
-            outputStream.write(bytes);
-            outputStream.close();
+                File uploadFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+                BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
+                outputStream.write(bytes);
+                outputStream.close();
 
-        } catch (FileNotFoundException fileNotFoundException) {
-            System.out.println("Image not Found");
-            modelMap.addAttribute("imageNotFoundError", "Please upload a valid file");
-        } catch (IOException ioException) {
-            System.out.println("Error Occured while saving file");
-            modelMap.addAttribute("addImageError", "There was a problem while saving file. Please try again");
-        } catch (Exception exception) {
-            exception.printStackTrace();
+            } catch (FileNotFoundException fileNotFoundException) {
+                System.out.println("Image not Found");
+                modelMap.addAttribute("imageNotFoundError", "Please upload a valid file");
+            } catch (IOException ioException) {
+                System.out.println("Error Occured while saving file");
+                modelMap.addAttribute("addImageError", "There was a problem while saving file. Please try again");
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         }
-//    }
 
 
         for(String toMail: toMailList){
@@ -104,7 +101,7 @@ public class UserComposeController {
                 tempMail.setFromMail(fromMail);
                 tempMail.setSubject(mail.getSubject());
                 tempMail.setBody(mail.getBody());
-//                tempMail.setDocuments(tempFileNames);
+                tempMail.setDocuments(tempFileNames);
 
                 tempMail.setToMail(toMail);
                 mailService.save(tempMail);
