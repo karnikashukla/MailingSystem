@@ -7,12 +7,13 @@ import com.intranet.mailingsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -30,10 +31,11 @@ public class UserComposeController {
     @GetMapping("/compose")
     public String displayComposePage(HttpSession session, ModelMap modelMap, User user){
         if (session.getAttribute("userId") != null){
-            User user1 = userService.getUserById((long) session.getAttribute("userId"));
-
-            modelMap.addAttribute("fromMail",user1.getEmail());
-            modelMap.addAttribute("compose", new Mail(user1.getEmail()));
+            user = userService.getUserById((long) session.getAttribute("userId"));
+            modelMap.addAttribute("firstName", user.getFirstName());
+            modelMap.addAttribute("lastName", user.getLastName());
+            modelMap.addAttribute("fromMail",user.getEmail());
+            modelMap.addAttribute("compose", new Mail(user.getEmail()));
             return "/compose";
         }
         else {
@@ -44,26 +46,65 @@ public class UserComposeController {
     }
 
     @PostMapping("/compose")
-    public String sendEmail(@ModelAttribute("compose") Mail mail, HttpSession session){
-        long id= (long) session.getAttribute("userId");
-        String fromMail = userService.getUserById(id).getEmail();
-        List<String> toMailList = Arrays.asList(mail.getToMail().split(","));
+    public String sendEmail(@Valid @ModelAttribute("compose") Mail mail, HttpSession session, @RequestParam("documents") MultipartFile documents, BindingResult bindingResult, ModelMap modelMap) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("ERROR in user Form");
+            return "compose";
+        }
+
+        long id = (long) session.getAttribute("userId");
+
+        User user = userService.getUserById(id);
+        String fromMail = user.getEmail();
+
         Mail tempMail = new Mail();
-        int counter = 15;
+
+        List<String> toMailList = Arrays.asList(mail.getToMail().split(","));
+
+        String domain = fromMail.substring(fromMail.indexOf("@") + 1);
+        Pattern emailFinder = Pattern.compile(domain);
+        Matcher fromMailMatcher = emailFinder.matcher(fromMail);
+
+        String UPLOADED_FOLDER = "E://Intranet";
+
+        List<String> tempFileNames = null;
+        File dir = new File(UPLOADED_FOLDER);
+//        for (int i = 0; i < documents.length; i++) {
+        MultipartFile file = documents;
+        //tempFileNames.add(file.getOriginalFilename());
+        try {
+            byte[] bytes = file.getBytes();
+
+            if (!dir.exists())
+                dir.mkdirs();
+
+            File uploadFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+            BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
+            outputStream.write(bytes);
+            outputStream.close();
+
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("Image not Found");
+            modelMap.addAttribute("imageNotFoundError", "Please upload a valid file");
+        } catch (IOException ioException) {
+            System.out.println("Error Occured while saving file");
+            modelMap.addAttribute("addImageError", "There was a problem while saving file. Please try again");
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+//    }
+
 
         for(String toMail: toMailList){
-            String domain =  fromMail.substring(fromMail.indexOf("@") + 1);
-            Pattern emailFinder = Pattern.compile(domain);
             Matcher toMailMatcher = emailFinder.matcher(toMail);
-            Matcher fromMailMatcher = emailFinder.matcher(fromMail);
 
             if(toMailMatcher.find() && fromMailMatcher.find()){
-                tempMail.setMailId(counter);
-                counter++;
-
-                tempMail.setFromMail(mail.getFromMail());
+                tempMail.setToName(userService.getUserByEmail(toMail).getFirstName() + " " + userService.getUserByEmail(toMail).getLastName());
+                tempMail.setFromName(user.getFirstName() + " " + user.getLastName());
+                tempMail.setFromMail(fromMail);
                 tempMail.setSubject(mail.getSubject());
                 tempMail.setBody(mail.getBody());
+//                tempMail.setDocuments(tempFileNames);
 
                 tempMail.setToMail(toMail);
                 mailService.save(tempMail);
@@ -78,8 +119,3 @@ public class UserComposeController {
         return "redirect:/users/compose";
     }
 }
-
-
-//    @([\\w\\.]+\\.\\w+)
-//    Pattern emailFinder = Pattern.compile("gmail.com");
-//    Matcher emailmatcher = emailFinder.matcher(email1);

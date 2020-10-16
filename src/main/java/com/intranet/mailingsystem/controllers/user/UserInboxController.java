@@ -23,28 +23,29 @@ public class UserInboxController {
 
     @GetMapping("/inbox")
     public String displayInbox(ModelMap modelMap, HttpSession session) throws Exception{
-        modelMap.addAttribute("mailError", "");
+        modelMap.addAttribute("mailError", null);
         if (session.getAttribute("userId") != null){
-            User user = userService.getUserById((long) session.getAttribute("userId"));
 
-            if(mailService.findAllMailsOfUser(user.getEmail()) != null){
-                List<Mail> mailList = mailService.findAllMailsOfUser(user.getEmail());
+            User user = userService.getUserById((long) session.getAttribute("userId"));
+            modelMap.addAttribute("firstName", user.getFirstName());
+            modelMap.addAttribute("lastName", user.getLastName());
+
+            if(mailService.findAllMailsOfUserInbox(user.getEmail()) != null){
+
+                List<Mail> mailList = mailService.findAllMailsOfUserInbox(user.getEmail());
                 modelMap.addAttribute("mailList", mailList);
-                System.out.println(user.getEmail());
-                return "inbox";
+
             }
             else{
+                modelMap.addAttribute("mailError", "cannot display data!");
                 //cannot display mails message here
-                return "inbox";
             }
+            return "inbox";
 
         }
         else {
             return "redirect:/users/login";
         }
-        //service api of retriving particular user's inbox mail
-        //sending list of MailModel to frontend.
-
     }
 
     @GetMapping("/logout")

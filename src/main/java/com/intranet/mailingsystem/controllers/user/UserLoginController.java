@@ -27,8 +27,6 @@ public class UserLoginController {
     @PostMapping("/login")
     public String doUserLogin(@ModelAttribute("userLogin") LoginModel loginModel, ModelMap modelMap, HttpSession session){
 
-        System.out.println("User name : " + loginModel.getEmail());
-
             if(userService.getUserByEmail(loginModel.getEmail()) != null){
                 User user = userService.getUserByEmail(loginModel.getEmail());
 

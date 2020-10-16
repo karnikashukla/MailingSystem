@@ -118,8 +118,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<div class="profile_img">	
 
 									<div class="user-name">
-										<p>User</p>
-										<span>user</span>
+										<p th:text="${firstName}"></p>
+										<span th:text="${lastName}"></span>
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
 									<i class="fa fa-angle-up lnr"></i>
@@ -149,14 +149,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							Inbox 
 						</div>
 						<div class="inbox-page">
-					<h4>Today</h4>
-					<span th:if="${mailError==null}">
-						<div class="inbox-row widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
+
+<!--					<span th:if="${mailError==null}">-->
+						<div th:each="mail :  ${mailList}" class="inbox-row widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
 <!--						<div class="mail "> <input type="checkbox" class="checkbox"> </div>-->
 
-						<div class="mail mail-name"> <h6>Alexander</h6> </div>
+						<div th:text="${mail.getFromName()}" class="mail mail-name"> <h6></h6> </div>
 						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-							<div class="mail"><p>Nullam quis risus eget urna mollis ornare accusamus terry </p></div>
+							<div  th:text="${mail.getSubject()}" class="mail"><p> </p></div>
 						</a>
 						<div class="mail-right dots_drop">
 							<div class="dropdown">
@@ -189,7 +189,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<div class="clearfix"> </div>
 						<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 							<div class="mail-body">
-								<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.</p>
+								<p th:text="${mail.getBody()}"></p>
 								<form>
 									<input type="text" placeholder="Reply to sender" required="">
 									<input type="submit" value="Send">
@@ -197,7 +197,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 					</div>
-					</span>
+<!--					</span>-->
+							<span th:if="${mailError!= null}" th:text="${mailError}"></span>
 				</div>
 
 						

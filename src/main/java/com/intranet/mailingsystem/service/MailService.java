@@ -18,9 +18,15 @@ public class MailService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public List<Mail> findAllMailsOfUser(String userEmail){
+    public List<Mail> findAllMailsOfUserInbox(String userEmail){
         Query query = new Query();
         query.addCriteria(Criteria.where("toMail").is(userEmail));
+        return mongoTemplate.find(query, Mail.class);
+    }
+
+    public List<Mail> findAllMailsOfUserSent(String userEmail){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("fromMail").is(userEmail));
         return mongoTemplate.find(query, Mail.class);
     }
 

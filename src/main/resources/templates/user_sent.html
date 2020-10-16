@@ -128,7 +128,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </a>
                         <ul class="dropdown-menu drp-mnu">
-                            <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
+                            <li> <a href="/users/profile"><i class="fa fa-suitcase"></i> Profile</a> </li>
                             <li> <a href="/users/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
                         </ul>
                     </li>
@@ -150,13 +150,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         Sent
                     </div>
                     <div class="inbox-page">
-                                                <!--					<span th:if="${mailError==null}">-->
-                        <div class="inbox-row widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
+
+                        <div th:each="mail :  ${mailList}" class="inbox-row widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
                             <!--						<div class="mail "> <input type="checkbox" class="checkbox"> </div>-->
 
-                            <div class="mail mail-name"> <h6>Alexander</h6> </div>
+                            <div class="mail mail-name"> <h6  th:text="${mail.getToName()}"></h6> </div>
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <div class="mail"><p>Nullam quis risus eget urna mollis ornare accusamus terry </p></div>
+                                <div class="mail"><p  th:text="${mail.getSubject()}" ></p></div>
                             </a>
                             <div class="mail-right dots_drop">
                                 <div class="dropdown">
@@ -189,15 +189,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <div class="clearfix"> </div>
                             <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="mail-body">
-                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.</p>
+                                    <p th:text="${mail.getBody()}"></p>
                                     <form>
-                                        <input type="text" placeholder="Reply to sender" required="">
+<!--                                        <input type="text" placeholder="Reply to sender" required="">-->
                                         <input type="submit" value="Send">
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        </span>
+
+                        <div style="text-align: center"><span th:if="${mailError!=null}" th:text="${mailError}"></span></div>
                     </div>
 
 

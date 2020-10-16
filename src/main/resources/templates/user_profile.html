@@ -126,8 +126,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <div class="profile_img">
 
                                 <div class="user-name">
-                                    <p>Admin Name</p>
-                                    <span>Administrator</span>
+                                    <p th:text="${user.getFirstName()}"></p>
+                                    <span th:text="${user.getLastName()}"></span>
                                 </div>
                                 <i class="fa fa-angle-down lnr"></i>
                                 <i class="fa fa-angle-up lnr"></i>
@@ -136,8 +136,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         </a>
                         <ul class="dropdown-menu drp-mnu">
 
-                            <li><a href="#"><i class="fa fa-suitcase"></i> Profile</a></li>
-                            <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+                            <li><a href="/users/profile"><i class="fa fa-suitcase"></i> Profile</a></li>
+                            <li><a href="/users/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -160,33 +160,35 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <h4>Edit Profile</h4>
                             </div>
                             <div class="form-body">
-                                <form method="post" class="form-horizontal " id="updateProfileForm">
+                                <form method="post" th:object="${user}" class="form-horizontal " id="updateProfileForm" action="/users/profile">
                                     <div class="form-group"><label for="fname"
                                                                    class="col-sm-2 control-label">First Name</label>
-                                        <div class="col-sm-9"><input type="text" class="form-control" id="fname"
-                                                                     placeholder=""/></div>
+                                        <div class="col-sm-9"><input type="text" th:field="*{firstName}" class="form-control" id="fname"
+                                                                     th:placeholder="${user.getFirstName()}"/></div>
                                     </div>
                                     <div class="form-group"><label for="lname"
                                                                    class="col-sm-2 control-label">Last Name</label>
-                                        <div class="col-sm-9"><input type="text" class="form-control" id="lname"
-                                                                     placeholder=""/></div>
+                                        <div class="col-sm-9"><input type="text" th:field="*{lastName}" class="form-control" id="lname"
+                                                                     th:placeholder="${user.getLastName()}"/></div>
                                     </div>
                                     <div class="form-group"><label for="email" class="col-sm-2 control-label">Email
                                         Address</label>
-                                        <div class="col-sm-9"><input type="text" class="form-control"
-                                                                     id="email" placeholder=""/></div>
+                                        <div class="col-sm-9"><input type="text" th:field="*{email}" class="form-control"
+                                                                     id="email" th:placeholder="${user.getEmail()}"/></div>
                                     </div>
                                     <div class="form-group"><label for="altremail" class="col-sm-2 control-label">Alternate
                                         Email Address</label>
-                                        <div class="col-sm-9"><input type="text" class="form-control"
-                                                                     id="altremail" placeholder=""/></div>
+                                        <div class="col-sm-9"><input type="text" th:field="*{alternateEmail}" class="form-control"
+                                                                     id="altremail" th:placeholder="${user.getAlternateEmail()}"/></div>
                                     </div>
                                     <div class="form-group"><label for="number" class="col-sm-2 control-label">Contact
                                         Number</label>
-                                        <div class="col-sm-9"><input type="text" class="form-control"
-                                                                     id="number" placeholder=""/></div>
+                                        <div class="col-sm-9"><input type="text" th:field="*{phone}" class="form-control"
+                                                                     id="number" th:placeholder="${user.getPhone()}"/></div>
                                     </div>
-
+                                    <div>
+                                        <input type="hidden" id="" th:field="*{id}">
+                                    </div>
                                 </form>
 
                                 <div class="form-group">

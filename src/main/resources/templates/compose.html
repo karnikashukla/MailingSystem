@@ -117,8 +117,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<div class="profile_img">	
 
 									<div class="user-name">
-										<p>User</p>
-										<span>user</span>
+										<p th:text="${firstName}"></p>
+										<span th:text="${lastName}"></span>
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
 									<i class="fa fa-angle-up lnr"></i>
@@ -151,18 +151,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<div class="alert alert-info">
 								Please fill details to send a new message
 							</div>
-							<form class="com-mail" th:object="${compose}" method="post" action="#" >
+							<form class="com-mail" th:object="${compose}" method="post" action="/users/compose" enctype="multipart/form-data">
 								<input type="text" th:field="*{toMail}" class="form-control1 control3" placeholder="To :">
 								<input type="text" class="form-control1 control3" th:placeholder="'From :' + ${fromMail}" disabled>
 								<input type="text" th:field="*{subject}" class="form-control1 control3" placeholder="Subject :" autocomplete="off">
 								<textarea rows="6" th:field="*{body}" class="form-control1 control2" placeholder="Message :" autocomplete="off"></textarea>
-								<div class="form-group">
-									<div class="btn btn-default btn-file">
-										<i class="fa fa-paperclip"></i> Attachment
-										<input type="file" name="attachment">
-									</div>
-									<p class="help-block">Max. 32MB</p>
-								</div>
+								<input type="file" id="documents" name="documents"/>
+<!--								<div class="form-group">-->
+<!--									<div class="btn btn-default btn-file">-->
+<!--										<i class="fa fa-paperclip">Attachment</i>-->
+<!--										-->
+<!--									</div>-->
+<!--									<p class="help-block">Max. 32MB</p>-->
+<!--								</div>-->
 								<input type="submit" value="Send Message"> 
 							</form>
 						</div>

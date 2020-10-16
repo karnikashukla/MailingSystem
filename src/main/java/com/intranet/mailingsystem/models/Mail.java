@@ -1,33 +1,57 @@
 package com.intranet.mailingsystem.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document(collection = "mail_collection")
 public class Mail {
-    @Id
-    private Integer mailId;
+    @Transient
+    public static final String SEQUENCE_NAME = "mail_sequence";
 
+    @Id
+    private long id;
+
+    private String toName;
     private String toMail;
+    private String fromName;
     private String fromMail;
     private String subject;
     private String body;
-    private String document;
+    private List<String> documents;
 
-    public String getDocument() {
-        return document;
+    public String getToName() {
+        return toName;
     }
 
-    public void setDocument(String document) {
-        this.document = document;
+    public void setToName(String toName) {
+        this.toName = toName;
     }
 
-    public Integer getMailId() {
-        return mailId;
+    public String getFromName() {
+        return fromName;
     }
 
-    public void setMailId(Integer mailId) {
-        this.mailId = mailId;
+    public void setFromName(String fromName) {
+        this.fromName = fromName;
+    }
+
+    public List<String> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<String> documents) {
+        this.documents = documents;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long mailId) {
+        this.id = mailId;
     }
 
     public String getToMail() {
