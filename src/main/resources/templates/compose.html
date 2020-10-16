@@ -1,13 +1,7 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Glance Design Dashboard an Admin Panel Category Flat Bootstrap Responsive Website Template | Compose mail :: w3layouts</title>
+<title>Compose mail</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -56,7 +50,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<h1><a class="navbar-brand" href="admin-index.html"><span class="fa fa-area-chart"></span> Mail Box<span class="dashboard_text">Inbox</span></a></h1>
+						<h1><a class="navbar-brand" href="/users/inbox"><span class="fa fa-envelope"></span> Mail Box<span class="dashboard_text">Inbox</span></a></h1>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="sidebar-menu">
@@ -67,8 +61,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<i class="fa fa-envelope"></i> <span>Mailbox</span>
 									<i class="fa fa-angle-left pull-right"></i></a>
 								<ul class="treeview-menu">
-									<li><a href="/"><i class="fa fa-angle-right"></i> Mail Inbox</a></li>
-									<li><a href="/compose"><i class="fa fa-angle-right"></i> Compose Mail </a></li>
+									<li><a href="/users/inbox"><i class="fa fa-angle-right"></i> Mail Inbox</a></li>
+									<li><a href="/users/compose"><i class="fa fa-angle-right"></i> Compose Mail </a></li>
+									<li><a href="/users/sent"><i class="fa fa-angle-right"></i> sent </a></li>-->
 								</ul>
 							</li>
 							<li class="treeview">
@@ -131,7 +126,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>	
 							</a>
 							<ul class="dropdown-menu drp-mnu">
-								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li> 
+								<li> <a href="/users/profile"><i class="fa fa-suitcase"></i> Profile</a> </li>
 								<li> <a href="/users/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							</ul>
 						</li>
@@ -156,11 +151,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<div class="alert alert-info">
 								Please fill details to send a new message
 							</div>
-							<form class="com-mail" th:object="${compose}" method="post" action="#">
+							<form class="com-mail" th:object="${compose}" method="post" action="#" >
 								<input type="text" th:field="*{toMail}" class="form-control1 control3" placeholder="To :">
 								<input type="text" class="form-control1 control3" th:placeholder="'From :' + ${fromMail}" disabled>
-								<input type="text" th:field="*{subject}" class="form-control1 control3" placeholder="Subject :">
-								<textarea rows="6" th:field="*{body}" class="form-control1 control2" placeholder="Message :" ></textarea>
+								<input type="text" th:field="*{subject}" class="form-control1 control3" placeholder="Subject :" autocomplete="off">
+								<textarea rows="6" th:field="*{body}" class="form-control1 control2" placeholder="Message :" autocomplete="off"></textarea>
 								<div class="form-group">
 									<div class="btn btn-default btn-file">
 										<i class="fa fa-paperclip"></i> Attachment

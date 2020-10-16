@@ -32,7 +32,7 @@ public class UserService {
         return mongoTemplate.findOne(query, User.class);
     }
 
-    public User getUserById(String userId) {
+    public User getUserById(long userId) {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(userId));
         return mongoTemplate.findOne(query, User.class);

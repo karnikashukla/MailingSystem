@@ -22,20 +22,21 @@ public class UserInboxController {
     UserService userService;
 
     @GetMapping("/inbox")
-    public String displayInbox(ModelMap modelMap, HttpSession session){
+    public String displayInbox(ModelMap modelMap, HttpSession session) throws Exception{
         modelMap.addAttribute("mailError", "");
         if (session.getAttribute("userId") != null){
-            User user = userService.getUserById((String) session.getAttribute("userId"));
+            User user = userService.getUserById((long) session.getAttribute("userId"));
+
             if(mailService.findAllMailsOfUser(user.getEmail()) != null){
                 List<Mail> mailList = mailService.findAllMailsOfUser(user.getEmail());
                 modelMap.addAttribute("mailList", mailList);
+                System.out.println(user.getEmail());
                 return "inbox";
             }
             else{
                 //cannot display mails message here
                 return "inbox";
             }
-
 
         }
         else {

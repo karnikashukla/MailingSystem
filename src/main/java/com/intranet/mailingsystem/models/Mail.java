@@ -3,7 +3,7 @@ package com.intranet.mailingsystem.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "mail_collection")
+@Document(collection = "mail_collection")
 public class Mail {
     @Id
     private Integer mailId;

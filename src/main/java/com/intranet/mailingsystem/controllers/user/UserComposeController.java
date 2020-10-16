@@ -30,7 +30,7 @@ public class UserComposeController {
     @GetMapping("/compose")
     public String displayComposePage(HttpSession session, ModelMap modelMap, User user){
         if (session.getAttribute("userId") != null){
-            User user1 = userService.getUserByEmail((String) session.getAttribute("userId"));
+            User user1 = userService.getUserById((long) session.getAttribute("userId"));
 
             modelMap.addAttribute("fromMail",user1.getEmail());
             modelMap.addAttribute("compose", new Mail(user1.getEmail()));
@@ -45,10 +45,11 @@ public class UserComposeController {
 
     @PostMapping("/compose")
     public String sendEmail(@ModelAttribute("compose") Mail mail, HttpSession session){
-        String fromMail = (String) session.getAttribute("userId");
+        long id= (long) session.getAttribute("userId");
+        String fromMail = userService.getUserById(id).getEmail();
         List<String> toMailList = Arrays.asList(mail.getToMail().split(","));
         Mail tempMail = new Mail();
-        int counter = 10;
+        int counter = 15;
 
         for(String toMail: toMailList){
             String domain =  fromMail.substring(fromMail.indexOf("@") + 1);
