@@ -39,7 +39,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!-- Metis Menu -->
 <script src="/js/metisMenu.min.js"></script>
 <script src="/js/custom.js"></script>
+<script src="/js/validation.js" type="text/javascript"></script>
 <link href="/css/custom.css" rel="stylesheet">
+
 <!--//Metis Menu -->
 	<style >
 		.cbp-spmenu-push div#page-wrapper {
@@ -63,9 +65,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				<h2 class="title1">Login</h2>
 				<div class="widget-shadow">
 					<div class="login-body">
-						<form th:action="@{/admin/login}" th:object="${adminLogin}" method="post">
-							<input type="email" th:field="*{email}" class="user" name="email" placeholder="Enter Your Email" required="">
+						<form th:action="@{/admin/login}" th:object="${adminLogin}" method="post" class="user needs-validation">
+							<input type="email" th:field="*{email}" class="user" name="email" placeholder="Enter Your Email" required >
+							<small class="invalid-feedback text-capitalize">Please enter appropriate email address.</small>
 							<input type="password" th:field="*{password}" name="password" class="lock" placeholder="Password" required="">
+							<small class="invalid-feedback text-capitalize">Please enter correct password.</small>
 							<div class="forgot-grid">
 
 								<div class="forgot">
