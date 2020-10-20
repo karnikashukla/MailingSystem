@@ -67,25 +67,27 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text"  class="user" th:field="*{firstName}" name="fname" placeholder="Enter First Name" required="">
+                                <input type="text"  class="user" th:field="*{firstName}" name="fname" title="Enter your first name and only characters are allowed!" placeholder="Enter First Name" required="" pattern="[a-zA-Z ]+">
                             </div>
                             <div class="col-md-6">
-                                <input type="text"  class="user" th:field="*{lastName}" name="lname" placeholder="Enter Last Name" required="">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="email" th:field="*{email}" class="email" name="email" placeholder="Enter Your Email" required="">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="email" th:field="*{alternateEmail}" class="email" name="altemail" placeholder="Enter Alternate Email" required="">
+                                <input type="text"  class="user" th:field="*{lastName}" name="lname" title="Enter your last name and only characters are allowed!" placeholder="Enter Last Name" required="" pattern="[a-zA-Z ]+">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text"  th:field="*{phone}" class="phone" name="phoneNumber" placeholder="Enter Contact Number" required="">
+                                <input type="email" th:field="*{email}" class="email" name="email"  placeholder="Enter Your Email" required="">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" id="alterEmail" th:field="*{alternateEmail}" class="email"  name="altemail" placeholder="Enter Alternate Email" required="">
+                                <span class="text-capitalize text-danger" id="altrEmailError"></span>
+                            </div>
+<!--onfocusout="checkEmail()"-->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text"  th:field="*{phone}" title="Please enter numeric value!" class="phone" name="phoneNumber"  maxlength="10" minlength="10" placeholder="Enter Contact Number"  required pattern="[0-9]{10}">
                             </div>
                             <div class="col-md-6">
                                 <select name="corporationName">
@@ -98,14 +100,21 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="password" th:field="*{password}" name="password" class="lock" placeholder="Password" required="">
+                                <input type="password" th:field="*{password}" id="password" name="password"  class="lock" placeholder="Password" title="Your password must be 8 characters long, at least contain one Upper letter,one numbers and one special characters." required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8}$">
                             </div>
-<!--                            <div class="col-md-6">-->
-<!--                                <input type="password" th:field="*{password}" name="conPassword" class="lock" placeholder="Confirm  Password" required="">-->
-<!--                            </div>-->
+                            <div class="col-md-6">
+                                <input type="password" th:field="*{password}" id="conPassword" name="conPassword" class="lock" placeholder="Confirm  Password" required="">
+                                <span class="text-capitalize text-danger" id="passwordError"></span>
+                            </div>
                         </div>
 
-                        <input type="submit" name="Sign Up" value="Sign Up">
+                        <input type="submit" id="regSubmit" name="Sign Up" value="Sign Up">
+                        <div class="registration">
+                            Already have an account ?
+                            <a class="" href="/users/login">
+                                Login
+                            </a>
+                        </div>
 
                     </form>
                 </div>
@@ -114,6 +123,42 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 
+<!--    Email check-->
+    <script>
+        function checkEmail(){
+            var email1 = $("#email").val();
+            var email2 = $("#alterEmail").val();
+            if(email1===email2)
+            {
+                $("#altrEmailError").text("Email and Alternate email can not be same.");
+                $("#regSubmit").attr("disabled",true);
+            }
+            else {
+                $("#altrEmailError").text("");
+                $("#regSubmit").attr("disabled",false);
+            }
+        }
+    </script>
+    <!--    end-->
+    <!--    Password check-->
+    <script>
+        function checkPassword(){
+            var password = $("#password").val();
+            var confPassword = $("#conPassword").val();
+
+            if (password!== confPassword)
+            {
+                $("#passwordError").text("Password and Confirm password must be same.");
+                $("#regSubmit").attr("disabled",true);
+            }
+            else {
+                $("#passwordError").text("");
+                $("#regSubmit").attr("disabled",false);
+
+            }
+        }
+    </script>
+    <!--    end-->
     <!-- side nav js -->
     <script src='/js/SidebarNav.min.js' type='text/javascript'></script>
     <script>

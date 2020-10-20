@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Glance Design Dashboard an Admin Panel Category Flat Bootstrap Responsive Website Template | Forms ::
-        w3layouts</title>
+    <title>Corporation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -58,12 +57,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <h1><a class="navbar-brand" href="/users/inbox"><span class="fa fa-envelope"></span> Mail Box<span class="dashboard_text">Inbox</span></a></h1>
+                    <h1><a class="navbar-brand" href="/ds"><span class="fa fa-envelope"></span> Mailbox<span class="dashboard_text">Inbox</span></a></h1>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="sidebar-menu">
                         <li class="header">MAIN NAVIGATION</li>
-
+                        <li class="treeview">
+                            <a href="/admin/dashboard">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-envelope"></i> <span>Mailbox</span>
@@ -75,9 +78,22 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </ul>
                         </li>
                         <li class="treeview">
-                            <a href="/contact">
-                                <i class="fa fa-phone-square"></i>
-                                <span>Contact</span>
+                            <a href="#">
+                                <i class="fa fa-table"></i> <span>Tables</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/tables"><i class="fa fa-angle-right"></i> Simple tables</a></li>
+                            </ul>
+                        </li>
+                        <!--				<li class="treeview">-->
+                        <!--&lt;!&ndash;					<a href="/demo">&ndash;&gt;-->
+                        <!--						<span><a href="/admin/add/corporation">Domain</a></span>-->
+                        <!--&lt;!&ndash;					</a>&ndash;&gt;-->
+                        <!--				</li>-->
+                        <li class="treeview">
+                            <a href="/admin/add/corporation">
+                                <i class="fa fa-users"></i> <span>Domain</span>
                             </a>
                         </li>
                     </ul>
@@ -137,7 +153,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         </a>
                         <ul class="dropdown-menu drp-mnu">
 
-                            <li><a href="#"><i class="fa fa-suitcase"></i> Profile</a></li>
+<!--                            <li><a href="#"><i class="fa fa-suitcase"></i> Profile</a></li>-->
                             <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                     </li>
@@ -188,12 +204,86 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 </div>
 
             </div>
+            <table class="table text-center table-bordered table-responsive"  cellspacing="0">
+                <thead>
+                <tr>
+                    <th class="text-center">Corporation Name</th>
+                    <th class="text-center">Corporation Domain</th>
+                    <th class="text-center">Edit</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <tr class="text-center">
+                    <td>Dharamsinh Desai University</td>
+                    <td>ddu.ac.in</td>
+                    <td><a onclick="openCorporationModal()"><span class="fa fa-edit btn-warning"></span></a></td>
+                    <td><a><span class="fa fa-trash btn-warning"></span></a></td>
+                </tr>
+                <tr class="text-center">
+                    <td>Maharaja sayajirao university</td>
+                    <td>msu.ac.in</td>
+                    <td><a onclick="openCorporationModal()"><span class="fa fa-edit btn-warning"></span></a></td>
+                    <td><a><span class="fa fa-trash btn-warning"></span></a></td>
+                </tr>
+
+                </tbody>
+            </table>
         </div>
     </div>
     <!--footer-->
 
     <!--//footer-->
 </div>
+
+<!--change password model start-->
+<div class="modal" id="editModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title  text-dark font-weight-bold">Edit Corporation</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="oldPass" >Corporation Name</label>
+                    <input type="password" class="form-control" id="oldPass" placeholder=""/>
+                </div>
+                <div class="form-group">
+                    <label for="newPass" >Corporation Domain</label>
+                    <input type="password" class="form-control" id="newPass" placeholder=""/>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" name="change_pass" id="change_pass" class="btn btn-primary ">Update
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function openCorporationModal(){
+        $("#editModal").modal("show");
+    }
+    // $(document).ready(function () {
+    //     $("#changePassword").click(function () {
+    //         $("#formModal").modal("show");
+    //     })
+    // })
+</script>
+<!--change password model end-->
+
+
 
 <!-- side nav js -->
 <script src='/js/SidebarNav.min.js' type='text/javascript'></script>
