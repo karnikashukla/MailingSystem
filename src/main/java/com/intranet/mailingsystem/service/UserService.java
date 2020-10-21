@@ -24,7 +24,7 @@ public class UserService {
 
 
     public void save(User user){
-        userRepository.insert(user);
+        mongoTemplate.insert(user);
     }
 
 

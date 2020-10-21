@@ -17,12 +17,8 @@ public class AdminService {
     @Autowired
     AdminRepository adminRepository;
 
-    public List<Admin> adminLogin(String adminEmail){
-        return adminRepository.findAll();
-    }
-
     public void save(Admin admin){
-        adminRepository.insert(admin);
+        mongoTemplate.insert(admin);
     }
 
 

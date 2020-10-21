@@ -2,6 +2,7 @@ package com.intranet.mailingsystem.controllers.admin;
 
 import com.intranet.mailingsystem.models.Admin;
 import com.intranet.mailingsystem.models.LoginModel;
+import com.intranet.mailingsystem.sequencegenerator.SequenceGeneratorService;
 import com.intranet.mailingsystem.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,11 @@ public class AdminLoginController {
     @Autowired
     AdminService adminService;
 
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
+
+
+
     @GetMapping("/login")
     public String displayAdminLoginPage(ModelMap modelMap){
 
@@ -33,6 +39,7 @@ public class AdminLoginController {
        if(adminService.getAdminByEmail(admin.getEmail()) != null){
            Admin admin1 = adminService.getAdminByEmail(admin.getEmail());
            if(admin1.getPassword().equals(admin.getPassword())){
+               session.setAttribute("adminId", admin1.getId());
                return "redirect:/admin/dashboard";
            }
            else {
@@ -51,8 +58,8 @@ public class AdminLoginController {
     @GetMapping("/save")
     public void save(){
         Admin a = new Admin();
-        a.setId("2123");
-        a.setEmail("asd@asd.asd");
+        sequenceGeneratorService.generateSequence(Admin.SEQUENCE_NAME);
+        a.setEmail("tyu@gmail.com");
         a.setPassword("asd");
         adminService.save(a);
     }
