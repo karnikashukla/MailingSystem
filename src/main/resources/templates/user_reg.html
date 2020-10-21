@@ -64,7 +64,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="widget-shadow">
                 <div class="login-body">
                     <form th:action="@{/users/registration}"  th:object="${userRegistration}" method="post">
-
+                        <div class="row d-flex">
+                            <div class="col-md-12 text-center">
+                                <span class="text-center" th:if="${registerError != null}" th:text="${registerError}" style="color: red"></span>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <input type="text"  class="user" th:field="*{firstName}" name="fname" title="Enter your first name and only characters are allowed!" placeholder="Enter First Name" required="" pattern="[a-zA-Z ]+">
@@ -91,7 +95,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="col-md-6">
                                 <select name="corporationName" class="selectCorporation">
-                                    <option value="">--- Select Corporations ---</option>
+                                    <option value="Select Corporations">--- Select Corporations ---</option>
                                 </select>
                             </div>
                         </div>
@@ -120,6 +124,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
         </div>
     </div>
+</div>
 
 <!--    Email check-->
     <script src="/js/rest-api-calls.js" type="application/javascript"></script>
