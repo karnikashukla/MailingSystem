@@ -50,7 +50,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         }
     </style>
 </head>
-<body class="cbp-spmenu-push">
+<body class="cbp-spmenu-push" onload="getCorporations()">
 <div class="main-content">
 
     <!--left-fixed -navigation-->
@@ -90,10 +90,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <input type="text"  th:field="*{phone}" title="Please enter numeric value!" class="phone" name="phoneNumber"  maxlength="10" minlength="10" placeholder="Enter Contact Number"  required pattern="[0-9]{10}">
                             </div>
                             <div class="col-md-6">
-                                <select name="corporationName">
-                                    <option value="">-------Domain-------</option>
-                                    <option>opt 2</option>
-                                    <option>opt 3</option>
+                                <select name="corporationName" class="selectCorporation">
+                                    <option value="">--- Select Corporations ---</option>
                                 </select>
                             </div>
                         </div>
@@ -124,6 +122,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     </div>
 
 <!--    Email check-->
+    <script src="/js/rest-api-calls.js" type="application/javascript"></script>
     <script>
         function checkEmail(){
             var email1 = $("#email").val();

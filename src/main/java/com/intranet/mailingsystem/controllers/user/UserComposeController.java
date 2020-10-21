@@ -13,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,27 +51,28 @@ public class UserComposeController {
     @RequestMapping(value = "/compose", consumes = {"multipart/form-data"},method = RequestMethod.POST)
     public String sendEmail(@Valid @ModelAttribute("compose") Mail mail, HttpSession session, ModelMap modelMap, @RequestParam(value = "file")MultipartFile[] multipartFiles) {
 
-
         long id = (long) session.getAttribute("userId");
 
         User user = userService.getUserById(id);
         String fromMail = user.getEmail();
 
-        Mail tempMail = new Mail();
+        // Getting current System time
+        LocalDateTime current = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+        String formatted = current.format(formatter);
 
-        List<String> toMailList = Arrays.asList(mail.getToMail().split(","));
 
-        String domain = fromMail.substring(fromMail.indexOf("@") + 1);
-        Pattern emailFinder = Pattern.compile(domain);
-        Matcher fromMailMatcher = emailFinder.matcher(fromMail);
 
-        String UPLOADED_FOLDER = "E://Intranet";
+        // Storing file in specific folder
+        formatted = formatted.replaceAll("[^\\w\\s]"," ");
+        String UPLOADED_FOLDER = "E://Intranet/" + user.getId() + "/" + formatted;
         List<String> tempFileNames = new ArrayList<String>();
 
         File dir = new File(UPLOADED_FOLDER);
         for (int i = 0; i < multipartFiles.length; i++) {
             MultipartFile file = multipartFiles[i];
-            tempFileNames.add(file.getOriginalFilename());
+            tempFileNames.add(dir.getAbsolutePath() + File.separator +  file.getOriginalFilename());
+
             try {
                 byte[] bytes = file.getBytes();
 
@@ -91,24 +95,38 @@ public class UserComposeController {
             }
         }
 
+        // Extracting multiple emails from toMail and sending mail to each user
+        List<String> toMailList = Arrays.asList(mail.getToMail().split(","));
+        String domain = fromMail.substring(fromMail.indexOf("@") + 1);
+        Pattern emailFinder = Pattern.compile(".*" + domain);
+
 
         for(String toMail: toMailList){
             Matcher toMailMatcher = emailFinder.matcher(toMail);
-
+            Matcher fromMailMatcher = emailFinder.matcher(fromMail);
+            System.out.println(" From Mail ::: " + fromMailMatcher.toString() + " To Mail ::: " + toMailMatcher.toString() );
             if(toMailMatcher.find() && fromMailMatcher.find()){
-                tempMail.setToName(userService.getUserByEmail(toMail).getFirstName() + " " + userService.getUserByEmail(toMail).getLastName());
-                tempMail.setFromName(user.getFirstName() + " " + user.getLastName());
-                tempMail.setFromMail(fromMail);
-                tempMail.setSubject(mail.getSubject());
-                tempMail.setBody(mail.getBody());
-                tempMail.setDocuments(tempFileNames);
+                if(userService.getUserByEmail(toMail) != null){
+                    Mail tempMail = new Mail();
+                    tempMail.setDate(formatted);
+                    tempMail.setToName(userService.getUserByEmail(toMail).getFirstName() + " " + userService.getUserByEmail(toMail).getLastName());
+                    tempMail.setFromName(user.getFirstName() + " " + user.getLastName());
+                    tempMail.setFromMail(fromMail);
+                    tempMail.setSubject(mail.getSubject());
+                    tempMail.setBody(mail.getBody());
+                    tempMail.setDocuments(tempFileNames);
 
-                tempMail.setToMail(toMail);
-                mailService.save(tempMail);
-                System.out.println("Done");
+                    tempMail.setToMail(toMail);
+                    mailService.save(tempMail);
+                    System.out.println("Done");
+                }
+                else {
+                    System.out.println("User does not exist");
+                }
+
             }
             else {
-                continue;
+                System.out.println(toMail + " ::: This user does not belong to ");
             }
 
         }

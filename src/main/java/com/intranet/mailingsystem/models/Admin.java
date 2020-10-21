@@ -1,21 +1,24 @@
 package com.intranet.mailingsystem.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "admin_collection")
 public class Admin {
+    @Transient
+    public static final String SEQUENCE_NAME = "admin_sequence";
     @Id
-    private String _id;
+    private long id;
     private String email;
     private String password;
 
-    public String getId() {
-        return _id;
+    public long getId() {
+        return id;
     }
 
-    public void setId(String id) {
-        this._id = id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getEmail() {

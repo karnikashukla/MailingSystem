@@ -21,6 +21,7 @@ public class Mail {
     private String subject;
     private String body;
     private List<String> documents;
+    private String Date;
 
     public String getToName() {
         return toName;
@@ -84,6 +85,14 @@ public class Mail {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
     }
 
     public Mail() {

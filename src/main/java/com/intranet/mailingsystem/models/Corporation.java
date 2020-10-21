@@ -1,22 +1,26 @@
 package com.intranet.mailingsystem.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.annotation.Generated;
 
 @Document(collection = "corporation_collection")
 public class Corporation {
+    @Transient
+    public static final String SEQUENCE_NAME = "corporation_sequence";
 
-    private String id;
+    @Id
+    private long id;
     private String name;
     private String domain;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
