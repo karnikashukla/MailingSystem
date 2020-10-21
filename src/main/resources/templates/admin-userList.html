@@ -171,7 +171,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/admin/user/list"><i class="fa fa-angle-right"></i> User List</a></li>
+                                <li><a href="/admin/users/list"><i class="fa fa-angle-right"></i> User List</a></li>
                             </ul>
                             <ul class="treeview-menu">
                                 <li><a href="/admin/domain/list"><i class="fa fa-angle-right"></i> Domain List</a></li>
@@ -260,10 +260,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     User List
                 </div>
                 <hr color="black" style="border-color: black">
-                 <a href="/admin/users/list/download"> Download PDF here</a>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable"  cellspacing="0">
+
+                <div class="card-body ">
+                    <a href="/admin/users/list/download" class="btn btn-warning "> Download PDF</a>
+                    <div class="table-responsive" style="margin-top: 10px">
+                        <table class="table table-bordered table-striped" id="dataTable"  cellspacing="0">
                             <thead>
                             <tr>
 
@@ -275,12 +276,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="user : ${userList}">
-                                    <td th:text="${user.getFirstName() + ' ' + user.getLastName()}"></td>
+                                <tr th:each="user : ${userList}" >
+                                    <td th:text="${user.getFirstName() + ' ' + user.getLastName()}" class="text-capitalize"></td>
                                     <td th:text="${user.getEmail()}"></td>
                                     <td th:text="${user.getPhone()}"></td>
                                     <td th:text="${user.getCorporationName()}"></td>
-                                    <td>Delete</td>
+                                    <td><a class="btn btn-warning fa fa-trash"></a></td>
                                 </tr>
 
                             </tbody>

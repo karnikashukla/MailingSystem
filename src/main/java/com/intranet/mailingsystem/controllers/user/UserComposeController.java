@@ -67,33 +67,40 @@ public class UserComposeController {
         formatted = formatted.replaceAll("[^\\w\\s]"," ");
         String UPLOADED_FOLDER = "E://Intranet/" + user.getId() + "/" + formatted;
         List<String> tempFileNames = new ArrayList<String>();
+        if(multipartFiles!=null)
+        {
+            File dir = new File(UPLOADED_FOLDER);
+            for (int i = 0; i < multipartFiles.length; i++) {
+                MultipartFile file = multipartFiles[i];
+                tempFileNames.add(dir.getAbsolutePath() + File.separator +  file.getOriginalFilename());
 
-        File dir = new File(UPLOADED_FOLDER);
-        for (int i = 0; i < multipartFiles.length; i++) {
-            MultipartFile file = multipartFiles[i];
-            tempFileNames.add(dir.getAbsolutePath() + File.separator +  file.getOriginalFilename());
+                try {
+                    byte[] bytes = file.getBytes();
 
-            try {
-                byte[] bytes = file.getBytes();
+                    if (!dir.exists())
+                        dir.mkdirs();
 
-                if (!dir.exists())
-                    dir.mkdirs();
+                    File uploadFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+                    BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
+                    outputStream.write(bytes);
+                    outputStream.close();
 
-                File uploadFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
-                BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
-                outputStream.write(bytes);
-                outputStream.close();
-
-            } catch (FileNotFoundException fileNotFoundException) {
-                System.out.println("Image not Found");
-                modelMap.addAttribute("imageNotFoundError", "Please upload a valid file");
-            } catch (IOException ioException) {
-                System.out.println("Error Occured while saving file");
-                modelMap.addAttribute("addImageError", "There was a problem while saving file. Please try again");
-            } catch (Exception exception) {
-                exception.printStackTrace();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    System.out.println("Image not Found");
+                    modelMap.addAttribute("imageNotFoundError", "Please upload a valid file");
+                } catch (IOException ioException) {
+                    System.out.println("Error Occured while saving file");
+                    modelMap.addAttribute("addImageError", "There was a problem while saving file. Please try again");
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
         }
+        else
+        {
+            tempFileNames=null;
+        }
+
 
         // Extracting multiple emails from toMail and sending mail to each user
         List<String> toMailList = Arrays.asList(mail.getToMail().split(","));

@@ -3,16 +3,22 @@
 <head>
     <title>Sent Items</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
 
     <!-- Custom CSS -->
-    <link href="/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="/css/style.css" rel='stylesheet' type='text/css'/>
 
     <!-- font-awesome icons CSS -->
     <link href="/css/font-awesome.css" rel="stylesheet">
@@ -27,7 +33,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="/js/modernizr.custom.js"></script>
 
     <!--webfonts-->
-    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext"
+          rel="stylesheet">
     <!--//webfonts-->
 
     <!-- Metis Menu -->
@@ -44,13 +51,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <aside class="sidebar-left">
             <nav class="navbar navbar-inverse">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".collapse" aria-expanded="false">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".collapse"
+                            aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <h1><a class="navbar-brand" href="/users/inbox"><span class="fa fa-envelope"></span> Mail Box<span class="dashboard_text">Inbox</span></a></h1>
+                    <h1><a class="navbar-brand" href="/users/inbox"><span class="fa fa-envelope"></span> Mail Box<span
+                            class="dashboard_text">Inbox</span></a></h1>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="sidebar-menu">
@@ -63,7 +72,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <ul class="treeview-menu">
                                 <li><a href="/users/inbox"><i class="fa fa-angle-right"></i> Mail Inbox</a></li>
                                 <li><a href="/users/compose"><i class="fa fa-angle-right"></i> Compose Mail </a></li>
-                                <li><a href="/users/sent"><i class="fa fa-angle-right"></i> sent </a></li>-->
+                                <li><a href="/users/sent"><i class="fa fa-angle-right"></i> sent </a></li>
+                                -->
                             </ul>
                         </li>
                         <li class="treeview">
@@ -91,10 +101,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 <ul class="nofitications-dropdown">
 
                 </ul>
-                <div class="clearfix"> </div>
+                <div class="clearfix"></div>
             </div>
             <!--notification menu end -->
-            <div class="clearfix"> </div>
+            <div class="clearfix"></div>
         </div>
         <div class="header-right">
 
@@ -102,7 +112,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <!--search-box-->
             <div class="search-box">
                 <form class="input">
-                    <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
+                    <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search"
+                           id="input-31"/>
                     <label class="input__label" for="input-31">
                         <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
                             <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
@@ -128,15 +139,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </a>
                         <ul class="dropdown-menu drp-mnu">
-                            <li> <a href="/users/profile"><i class="fa fa-suitcase"></i> Profile</a> </li>
-                            <li> <a href="/users/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                            <li><a href="/users/profile"><i class="fa fa-suitcase"></i> Profile</a></li>
+                            <li><a href="/users/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
-            <div class="clearfix"> </div>
+            <div class="clearfix"></div>
         </div>
-        <div class="clearfix"> </div>
+        <div class="clearfix"></div>
     </div>
     <!-- //header-ends -->
     <!-- main content start-->
@@ -151,21 +162,25 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="inbox-page">
 
-                        <div th:each="mail :  ${mailList}" class="inbox-row widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div th:each="mail :  ${mailList}" class="inbox-row widget-shadow" id="accordion" role="tablist"
+                             aria-multiselectable="true">
                             <!--						<div class="mail "> <input type="checkbox" class="checkbox"> </div>-->
 
-                            <div class="mail mail-name"> <h6  th:text="${mail.getToName()}"></h6> </div>
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <div class="mail"><p  th:text="${mail.getSubject()}" ></p></div>
+                            <div class="mail mail-name"><h6 th:text="${mail.getToName()}"></h6></div>
+                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                               th:href="'#'+${mail.getId()}"
+                               aria-expanded="true" aria-controls="collapseOne">
+                                <div class="mail"><p th:text="${mail.getSubject()}"></p></div>
                             </a>
                             <div class="mail-right dots_drop">
                                 <div class="dropdown">
-                                    <a href="#"  data-toggle="dropdown" aria-expanded="false">
+                                    <a href="#" data-toggle="dropdown" aria-expanded="false">
                                         <p><i class="fa fa-ellipsis-v mail-icon"></i></p>
                                     </a>
                                     <ul class="dropdown-menu float-right">
                                         <li>
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                               th:href="'#'+${mail.getId()}" aria-expanded="true" aria-controls="collapseOne">
                                                 <i class="fa fa-reply mail-icon"></i>
                                                 Reply
                                             </a>
@@ -186,25 +201,24 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </div>
                             </div>
                             <div class="mail-right"><p>30th Nov</p></div>
-                            <div class="clearfix"> </div>
-                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="clearfix"></div>
+                            <div id="collapseOne" th:id="${mail.getId()}" class="panel-collapse collapse" role="tabpanel"
+                                 aria-labelledby="headingOne">
                                 <div class="mail-body">
                                     <p th:text="${mail.getBody()}"></p>
-                                    <form>
-<!--                                        <input type="text" placeholder="Reply to sender" required="">-->
-                                        <input type="submit" value="Send">
-                                    </form>
+
                                 </div>
                             </div>
                         </div>
 
-                        <div style="text-align: center"><span th:if="${mailError!=null}" th:text="${mailError}"></span></div>
+                        <div style="text-align: center"><span th:if="${mailError!=null}" th:text="${mailError}"></span>
+                        </div>
                     </div>
 
 
                 </div>
             </div>
-            <div class="clearfix"> </div>
+            <div class="clearfix"></div>
         </div>
 
     </div>
@@ -222,20 +236,20 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!-- Classie --><!-- for toggle left push menu script -->
 <script src="/js/classie.js"></script>
 <script>
-    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-        showLeftPush = document.getElementById( 'showLeftPush' ),
+    var menuLeft = document.getElementById('cbp-spmenu-s1'),
+        showLeftPush = document.getElementById('showLeftPush'),
         body = document.body;
 
-    showLeftPush.onclick = function() {
-        classie.toggle( this, 'active' );
-        classie.toggle( body, 'cbp-spmenu-push-toright' );
-        classie.toggle( menuLeft, 'cbp-spmenu-open' );
-        disableOther( 'showLeftPush' );
+    showLeftPush.onclick = function () {
+        classie.toggle(this, 'active');
+        classie.toggle(body, 'cbp-spmenu-push-toright');
+        classie.toggle(menuLeft, 'cbp-spmenu-open');
+        disableOther('showLeftPush');
     };
 
-    function disableOther( button ) {
-        if( button !== 'showLeftPush' ) {
-            classie.toggle( showLeftPush, 'disabled' );
+    function disableOther(button) {
+        if (button !== 'showLeftPush') {
+            classie.toggle(showLeftPush, 'disabled');
         }
     }
 </script>
@@ -247,7 +261,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!--//scrolling js-->
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.js"> </script>
+<script src="/js/bootstrap.js"></script>
 
 </body>
 </html>

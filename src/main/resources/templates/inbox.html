@@ -155,7 +155,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!--						<div class="mail "> <input type="checkbox" class="checkbox"> </div>-->
 
 						<div th:text="${mail.getFromName()}" class="mail mail-name"> <h6></h6> </div>
-						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						<a role="button" data-toggle="collapse" data-parent="#accordion" th:href="'#'+${mail.getId()}"  aria-expanded="true" aria-controls="collapseOne">
 							<div  th:text="${mail.getSubject()}" class="mail"><p> </p></div>
 						</a>
 						<div class="mail-right dots_drop">
@@ -165,7 +165,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</a>
 								<ul class="dropdown-menu float-right">
 									<li>
-										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+										<a role="button" data-toggle="collapse" data-parent="#accordion" th:href="'#'+${mail.getId()}" aria-expanded="true" aria-controls="collapseOne">
 											<i class="fa fa-reply mail-icon"></i>
 											Reply
 										</a>
@@ -187,16 +187,17 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="mail-right"><p>30th Nov</p></div>
 						<div class="clearfix"> </div>
-						<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+						<div  th:id="${mail.getId()}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 							<div class="mail-body">
 								<p th:text="${mail.getBody()}"></p>
+								<div th:if="${mail.getDocuments()!=null}">
 								<li th:each="document, stat : ${mail.getDocuments()}">
 									<a th:href="'/download/' + ${mail.getId()} + '/' +${stat.index}"> download</a>
 								</li>
-
+								</div>
 								<form>
 <!--									<input type="text" placeholder="Reply to sender" required="">-->
-									<input type="submit" value="Send">
+									<input type="submit" value="Reply">
 								</form>
 							</div>
 						</div>

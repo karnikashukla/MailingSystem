@@ -20,11 +20,14 @@ public class UserPDFExporter {
 
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.BLUE);
+        Color color=new Color(255,178,43);
+
+        cell.setBackgroundColor(color);
+
         cell.setPadding(5);
 
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
-        font.setColor(Color.WHITE);
+        font.setColor(Color.BLACK);
 
         cell.setPhrase(new Phrase("Name", font));
         table.addCell(cell);
@@ -56,7 +59,7 @@ public class UserPDFExporter {
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setSize(18);
-        font.setColor(Color.BLUE);
+        font.setColor(Color.BLACK);
 
         Paragraph p = new Paragraph("List of Users", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
