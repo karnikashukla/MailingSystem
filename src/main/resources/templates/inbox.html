@@ -190,8 +190,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 							<div class="mail-body">
 								<p th:text="${mail.getBody()}"></p>
+								<li th:each="document, stat : ${mail.getDocuments()}">
+									<a th:href="'/download/' + ${mail.getId()} + '/' +${stat.index}"> download</a>
+								</li>
+
 								<form>
-									<input type="text" placeholder="Reply to sender" required="">
+<!--									<input type="text" placeholder="Reply to sender" required="">-->
 									<input type="submit" value="Send">
 								</form>
 							</div>

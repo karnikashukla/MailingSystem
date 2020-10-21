@@ -59,8 +59,11 @@ public class AdminLoginController {
     public void save(){
         Admin a = new Admin();
         sequenceGeneratorService.generateSequence(Admin.SEQUENCE_NAME);
-        a.setEmail("tyu@gmail.com");
+        a.setFirstName("Karan Bhatt");
+        a.setLastName("Admin");
+        a.setEmail("asd@asd.asd");
         a.setPassword("asd");
+        a.setAlternateEmail("asd@asd.asd");
         adminService.save(a);
     }
 

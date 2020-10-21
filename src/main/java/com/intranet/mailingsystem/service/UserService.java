@@ -1,15 +1,11 @@
 package com.intranet.mailingsystem.service;
 
-import com.intranet.mailingsystem.models.Mail;
 import com.intranet.mailingsystem.models.User;
-import com.intranet.mailingsystem.repositories.AdminRepository;
 import com.intranet.mailingsystem.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,4 +51,9 @@ public class UserService {
         user1.setCorporationName(user.getCorporationName());
         mongoTemplate.save(user1);
     }
+
+    public List<User> getAllUsers(){
+        return mongoTemplate.findAll(User.class);
+    }
+
 }

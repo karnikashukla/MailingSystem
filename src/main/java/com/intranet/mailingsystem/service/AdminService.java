@@ -27,4 +27,10 @@ public class AdminService {
         query.addCriteria(Criteria.where("email").is(email));
         return mongoTemplate.findOne(query, Admin.class);
     }
+
+    public Admin getAdminById(long adminId){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(adminId));
+        return mongoTemplate.findOne(query, Admin.class);
+    }
 }

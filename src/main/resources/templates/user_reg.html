@@ -94,7 +94,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <input type="text"  th:field="*{phone}" title="Please enter numeric value!" class="phone" name="phoneNumber"  maxlength="10" minlength="10" placeholder="Enter Contact Number"  required pattern="[0-9]{10}">
                             </div>
                             <div class="col-md-6">
-                                <select name="corporationName" class="selectCorporation">
+                                <select name="corporationName" class="selectCorporation" th:field="*{corporationName}">
                                     <option value="Select Corporations">--- Select Corporations ---</option>
                                 </select>
                             </div>
@@ -105,7 +105,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <input type="password" th:field="*{password}" id="password" name="password"  class="lock" placeholder="Password" title="Your password must be 8 characters long, at least contain one Upper letter,one numbers and one special characters." required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8}$">
                             </div>
                             <div class="col-md-6">
-                                <input type="password" th:field="*{password}" id="conPassword" name="conPassword" class="lock" placeholder="Confirm  Password" required="">
+                                <input type="password" id="conPassword" name="conPassword" class="lock" placeholder="Confirm  Password" required="">
                                 <span class="text-capitalize text-danger" id="passwordError"></span>
                             </div>
                         </div>

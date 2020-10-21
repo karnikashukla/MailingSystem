@@ -1,5 +1,6 @@
 package com.intranet.mailingsystem.service;
 
+import com.intranet.mailingsystem.models.Admin;
 import com.intranet.mailingsystem.models.Mail;
 import com.intranet.mailingsystem.models.User;
 import com.intranet.mailingsystem.repositories.UserRepository;
@@ -14,7 +15,9 @@ import java.util.List;
 @Service
 public class MailService {
     @Autowired
-    private UserRepository userRepository;
+    UserService userService;
+    @Autowired
+    AdminService adminService;
     @Autowired
     private MongoTemplate mongoTemplate;
 
@@ -32,5 +35,32 @@ public class MailService {
 
     public void save(Mail mail){
         mongoTemplate.insert(mail);
+    }
+
+    public boolean searchMail(String mail){
+        if(adminService.getAdminByEmail(mail) != null){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public List<Mail> findAllMailsOfAdminInbox(String adminEmail){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("toMail").is(adminEmail));
+        return mongoTemplate.find(query,Mail.class);
+    }
+
+    public List<Mail> findAllMailsOfAdminSent(String adminEmail){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("fromMail").is(adminEmail));
+        return mongoTemplate.find(query,Mail.class);
+    }
+
+    public Mail findMailById(long mailId){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(mailId));
+        return mongoTemplate.findOne(query,Mail.class);
     }
 }

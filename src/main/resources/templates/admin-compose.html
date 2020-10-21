@@ -235,11 +235,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         <div class="alert alert-info">
                             Please fill details to send a new message
                         </div>
-                        <form class="com-mail" th:object="" method="post" action="/admin/compose" enctype="multipart/form-data">
-                            <input type="text" th:field="" class="form-control1 control3" placeholder="To :"/>
-                            <input type="text" class="form-control1 control3" th:placeholder="'From :'  " disabled/>
-                            <input type="text" th:field="" class="form-control1 control3" placeholder="Subject :" autocomplete="off"/>
-                            <textarea rows="6" th:field="" class="form-control1 control2" placeholder="Message :" autocomplete="off"></textarea>
+                        <form class="com-mail" th:object="${compose}" method="post" action="/admin/compose" enctype="multipart/form-data">
+                            <input type="text" th:field="*{toMail}" class="form-control1 control3" placeholder="To :"/>
+                            <input type="text" class="form-control1 control3" th:placeholder="'From :  ' +  ${fromMail}" disabled/>
+                            <input type="text" th:field="*{subject}" class="form-control1 control3" placeholder="Subject :" autocomplete="off"/>
+                            <textarea rows="6" th:field="*{body}" class="form-control1 control2" placeholder="Message :" autocomplete="off"></textarea>
                             <input type="file" id="file" name="file"/>
                             <!--								<div class="form-group">-->
                             <!--									<div class="btn btn-default btn-file">-->
