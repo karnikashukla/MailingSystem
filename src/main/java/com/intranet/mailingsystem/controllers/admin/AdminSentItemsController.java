@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminInboxController {
-    @GetMapping("/inbox")
-    public String displayAdminInbox(){
-        return "/admin-inbox";
-    }
+public class AdminSentItemsController {
 
+    @GetMapping("/sent")
+    public String displayAdminSentItems(){
+        return "/admin-sent";
+    }
 
 }
