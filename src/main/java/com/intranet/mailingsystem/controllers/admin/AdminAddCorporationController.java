@@ -25,6 +25,11 @@ public class AdminAddCorporationController {
         return "forms";
     }
 
+    @GetMapping("domain/list")
+    public String showDomains(){
+        return "admin-domainList";
+    }
+
     @PostMapping("/add/corporation")
     public String addCorporation(ModelMap modelMap, @ModelAttribute("newCorporation") Corporation corporation){
         corporationService.save(corporation);
