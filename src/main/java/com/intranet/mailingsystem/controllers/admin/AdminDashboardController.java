@@ -18,7 +18,7 @@ public class AdminDashboardController {
 
     @GetMapping("/dashboard")
     public String displayDashboard(HttpSession session, ModelMap modelMap){
-        if(adminService.getAdminById((long) session.getAttribute("adminId")) != null){
+        if(session.getAttribute("adminId") != null){
             return "/admin-index";
         }
         else {

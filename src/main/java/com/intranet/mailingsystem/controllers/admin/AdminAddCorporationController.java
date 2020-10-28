@@ -38,8 +38,14 @@ public class AdminAddCorporationController {
     }
 
     @GetMapping("domain/list")
-    public String showDomains(){
-        return "admin-domainList";
+    public String showDomains(HttpSession session){
+        if (session.getAttribute("adminId") != null){
+            return "admin-domainList";
+        }
+        else {
+            return "redirect:/admin/login";
+        }
+
     }
 
     @PostMapping("/add/corporation")

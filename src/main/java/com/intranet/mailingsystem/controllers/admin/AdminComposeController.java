@@ -74,7 +74,8 @@ public class AdminComposeController {
             File dir = new File(UPLOADED_FOLDER);
             for (int i = 0; i < multipartFiles.length; i++) {
                 MultipartFile file = multipartFiles[i];
-                tempFileNames.add(dir.getAbsolutePath() + File.separator +  file.getOriginalFilename());
+                System.out.println(" File name : " +file.getOriginalFilename());
+                System.out.println("Is file empty? : " + file.isEmpty());
 
                 try {
                     byte[] bytes = file.getBytes();
@@ -85,6 +86,7 @@ public class AdminComposeController {
                     File uploadFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
                     BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
                     outputStream.write(bytes);
+                    tempFileNames.add(dir.getAbsolutePath() + File.separator +  file.getOriginalFilename());
                     outputStream.close();
 
                 } catch (FileNotFoundException fileNotFoundException) {

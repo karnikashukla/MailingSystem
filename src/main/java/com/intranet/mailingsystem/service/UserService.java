@@ -40,7 +40,7 @@ public class UserService {
 
         System.out.println(" User Id : " + userId);
         Query query = new Query();
-        query.addCriteria(Criteria.where("userId").is(userId));
+        query.addCriteria(Criteria.where("_id").is(userId));
         User user1 = getUserById(userId);
         System.out.println(" In UserService ::: Printing user1 ::: "+ user1.getId() + " + " + user1.getEmail());
         user1.setFirstName(user.getFirstName());
@@ -54,6 +54,18 @@ public class UserService {
 
     public List<User> getAllUsers(){
         return mongoTemplate.findAll(User.class);
+    }
+
+    public void deleteUser(long userId){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(userId));
+        mongoTemplate.remove(query, User.class);
+    }
+
+    public List<User> findUsersByCorporations(String corporationName){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("corporationName").is(corporationName));
+        return mongoTemplate.find(query, User.class);
     }
 
 }

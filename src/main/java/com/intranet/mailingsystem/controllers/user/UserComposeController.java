@@ -72,7 +72,7 @@ public class UserComposeController {
             File dir = new File(UPLOADED_FOLDER);
             for (int i = 0; i < multipartFiles.length; i++) {
                 MultipartFile file = multipartFiles[i];
-                tempFileNames.add(dir.getAbsolutePath() + File.separator +  file.getOriginalFilename());
+
 
                 try {
                     byte[] bytes = file.getBytes();
@@ -83,6 +83,7 @@ public class UserComposeController {
                     File uploadFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
                     BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
                     outputStream.write(bytes);
+                    tempFileNames.add(dir.getAbsolutePath() + File.separator +  file.getOriginalFilename());
                     outputStream.close();
 
                 } catch (FileNotFoundException fileNotFoundException) {

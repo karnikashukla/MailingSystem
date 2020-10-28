@@ -31,4 +31,10 @@ public class CorporationService {
     public List<Corporation> findAllCorporation(){
         return mongoTemplate.findAll(Corporation.class);
     }
+
+    public void deleteCorporation(long corporationId){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(corporationId));
+        mongoTemplate.remove(query, Corporation.class);
+    }
 }

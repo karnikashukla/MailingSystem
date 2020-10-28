@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -44,5 +46,29 @@ public class AdminUserListController {
         UserPDFExporter exporter = new UserPDFExporter(listUsers);
         exporter.export(response);
 
+    }
+
+    @GetMapping("/users/list/{corporationName}")
+    public String displayUsersThatBelongToACorporation(@PathVariable("corporationName") String corporationName, ModelMap modelMap, HttpSession session){
+        if(session.getAttribute("adminId") != null){
+            List<User> userList = userService.findUsersByCorporations(corporationName);
+            modelMap.addAttribute("userList", userList);
+            return "admin-userList";
+        }
+        else {
+            return "redirect:/admin/login";
+        }
+    }
+
+    @GetMapping("/users/delete/{userId}")
+    public String deleteUser(@PathVariable("userId") long userId, ModelMap modelMap, HttpSession session){
+        if(session.getAttribute("adminId") != null){
+            userService.deleteUser(userId);
+            modelMap.addAttribute("userDeletedSuccessfully", " User Deleted Successfully");
+            return "redirect:/admin/users/list";
+        }
+        else {
+            return "redirect:/admin/login";
+        }
     }
 }

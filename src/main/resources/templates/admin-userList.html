@@ -174,7 +174,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <li><a href="/admin/users/list"><i class="fa fa-angle-right"></i> User List</a></li>
                             </ul>
                             <ul class="treeview-menu">
-                                <li><a href="/admin/domain/list"><i class="fa fa-angle-right"></i> Domain List</a></li>
+                                <li><a href="/admin/corporations/list"><i class="fa fa-angle-right"></i> Domain List</a></li>
                             </ul>
                         </li>
 
@@ -281,7 +281,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <td th:text="${user.getEmail()}"></td>
                                     <td th:text="${user.getPhone()}"></td>
                                     <td th:text="${user.getCorporationName()}"></td>
-                                    <td><a class="btn btn-warning fa fa-trash"></a></td>
+                                    <td><a class="btn btn-warning fa fa-trash" th:href="'/admin/users/delete/' + ${user.getId()}"></a></td>
                                 </tr>
 
                             </tbody>
