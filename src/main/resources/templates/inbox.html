@@ -185,20 +185,17 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</ul>
 							</div> 
 						</div>
-						<div class="mail-right"><p>30th Nov</p></div>
+						<div class="mail-right"><p th:text="${mail.getDate()}"></p></div>
 						<div class="clearfix"> </div>
 						<div  th:id="${mail.getId()}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 							<div class="mail-body">
 								<p th:text="${mail.getBody()}"></p>
 								<div th:if="${mail.getDocuments()!=null}">
 								<li th:each="document, stat : ${mail.getDocuments()}">
-									<a th:href="'/download/' + ${mail.getId()} + '/' +${stat.index}"> downloa</a>
+									<a th:href="'/download/' + ${mail.getId()} + '/' +${stat.index}"> download</a>
 								</li>
 								</div>
-								<form>
-<!--									<input type="text" placeholder="Reply to sender" required="">-->
-									<input type="submit" value="Reply">
-								</form>
+								<a th:href="@{'/users/send/' + ${mail.getFromMail()}}">Reply</a>
 							</div>
 						</div>
 					</div>

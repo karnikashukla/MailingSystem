@@ -38,7 +38,13 @@ public class UserComposeController {
             modelMap.addAttribute("firstName", user.getFirstName());
             modelMap.addAttribute("lastName", user.getLastName());
             modelMap.addAttribute("fromMail",user.getEmail());
-            modelMap.addAttribute("compose", new Mail(user.getEmail()));
+            if (session.getAttribute("toEmail") != null){
+                modelMap.addAttribute("compose", new Mail(user.getEmail(), (String) session.getAttribute("toEmail")));
+            }
+            else {
+                modelMap.addAttribute("compose", new Mail(user.getEmail()));
+            }
+
             return "/compose";
         }
         else {
@@ -59,12 +65,12 @@ public class UserComposeController {
         // Getting current System time
         LocalDateTime current = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-        String formatted = current.format(formatter);
+        String format = current.format(formatter);
 
 
 
         // Storing file in specific folder
-        formatted = formatted.replaceAll("[^\\w\\s]"," ");
+        String formatted = format.replaceAll("[^\\w\\s]"," ");
         String UPLOADED_FOLDER = "E://Intranet/" + user.getId() + "/" + formatted;
         List<String> tempFileNames = new ArrayList<String>();
         if(multipartFiles!=null)
@@ -116,7 +122,7 @@ public class UserComposeController {
             if(toMailMatcher.find() && fromMailMatcher.find()){
                 if(userService.getUserByEmail(toMail) != null){
                     Mail tempMail = new Mail();
-                    tempMail.setDate(formatted);
+                    tempMail.setDate(format);
                     tempMail.setToName(userService.getUserByEmail(toMail).getFirstName() + " " + userService.getUserByEmail(toMail).getLastName());
                     tempMail.setFromName(user.getFirstName() + " " + user.getLastName());
                     tempMail.setFromMail(fromMail);

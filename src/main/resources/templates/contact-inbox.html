@@ -182,7 +182,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </a>
                                 </li>
 								<li th:align="center">
-									<button class="btn btn-warning " style="margin-top: 5px;margin-bottom: 5px">Send Email</button>
+									<a th:href="@{'/users/send/' + ${user.getEmail()}}" class="btn btn-warning " style="margin-top: 5px;margin-bottom: 5px">Send Email</a>
 								</li>
 
                             </ul>

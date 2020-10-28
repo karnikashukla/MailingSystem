@@ -59,12 +59,18 @@ public class AdminLoginController {
     public void save(){
         Admin a = new Admin();
         sequenceGeneratorService.generateSequence(Admin.SEQUENCE_NAME);
-        a.setFirstName("Karan Bhatt");
-        a.setLastName("Admin");
-        a.setEmail("asd@asd.asd");
-        a.setPassword("asd");
-        a.setAlternateEmail("asd@asd.asd");
+        a.setFirstName("Karnika");
+        a.setLastName("Shukla");
+        a.setEmail("admin-karnika@mailing.com");
+        a.setPassword("Karnika123!");
+        a.setAlternateEmail("karnikashukla25@gmail.com");
         adminService.save(a);
+    }
+
+    @GetMapping("/logout")
+    public String adminLogout(HttpSession session){
+        session.removeAttribute("adminId");
+        return "redirect:/admin/login";
     }
 
 

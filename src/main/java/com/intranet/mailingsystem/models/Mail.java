@@ -101,4 +101,9 @@ public class Mail {
     public Mail(String fromMail) {
         this.fromMail = fromMail;
     }
+
+    public Mail(String fromMail, String toMail){
+        this.fromMail = fromMail;
+        this.toMail = toMail;
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -32,5 +33,11 @@ public class UserContactController {
         else {
             return "redirect:/users/login";
         }
+    }
+
+    @GetMapping("/send/{toEmail}")
+    public String sendMailFromContact(@PathVariable("toEmail") String email, HttpSession session){
+        session.setAttribute("toEmail", email);
+        return "redirect:/users/compose";
     }
 }

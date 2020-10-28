@@ -40,32 +40,39 @@ public class UserRegistrationController {
     @PostMapping("/registration")
     public String doUserRegistration(@ModelAttribute("userRegistration") User user, ModelMap modelMap, Corporation corporation) {
         String registerError = null;
+
         if(userService.getUserByEmail(user.getEmail()) == null){
+            if(!user.getEmail().equals(user.getAlternateEmail())){
+                if(corporationService.findByCorporationName(user.getCorporationName()) != null){
 
-            if(corporationService.findByCorporationName(user.getCorporationName()) != null){
+                    corporation = corporationService.findByCorporationName(user.getCorporationName());
 
-                corporation = corporationService.findByCorporationName(user.getCorporationName());
+                    String domain = corporation.getDomain().substring(corporation.getDomain().indexOf("@") + 1);
+                    Pattern emailFinder = Pattern.compile(".*" + domain);
+                    Matcher emailMatcher = emailFinder.matcher(user.getEmail());
 
-                String domain = corporation.getDomain().substring(corporation.getDomain().indexOf("@") + 1);
-                Pattern emailFinder = Pattern.compile(".*" + domain);
-                Matcher emailMatcher = emailFinder.matcher(user.getEmail());
+                    if(emailMatcher.find()){
 
-                if(emailMatcher.find()){
-
-                    userService.save(user);
-                    return "redirect:/users/login";
+                        userService.save(user);
+                        return "redirect:/users/login";
+                    }
+                    else {
+                        registerError = "Your email does not match with domain registered with us.";
+                        modelMap.addAttribute("registerError",registerError);
+                        return "user_reg";
+                    }
                 }
                 else {
-                    registerError = "Your email does not match with domain registered with us.";
-                    modelMap.addAttribute("registerError",registerError);
+                    registerError = "Your Corporation is not registered yet to use our product.";
+                    modelMap.addAttribute("registerError", registerError);
                     return "user_reg";
                 }
             }
             else {
-                registerError = "Your Corporation is not registered yet to use our product.";
-                modelMap.addAttribute("registerError", registerError);
+                modelMap.addAttribute("registerError", "Alternate Email cannot be same as Email!");
                 return "user_reg";
             }
+
         }
         else{
             registerError = "Email already exists.";

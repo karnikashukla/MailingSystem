@@ -52,6 +52,13 @@ public class UserService {
         mongoTemplate.save(user1);
     }
 
+    public void editPassword(User user, String newPassword){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(user.getId()));
+        user.setPassword(newPassword);
+        mongoTemplate.save(user);
+    }
+
     public List<User> getAllUsers(){
         return mongoTemplate.findAll(User.class);
     }

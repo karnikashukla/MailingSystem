@@ -152,7 +152,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								Please fill details to send a new message
 							</div>
 							<form class="com-mail" th:object="${compose}" method="post" action="/users/compose" enctype="multipart/form-data">
-								<input type="text" th:field="*{toMail}" class="form-control1 control3" placeholder="To :" required />
+								<input type="text" th:field="*{toMail}" class="form-control1 control3" placeholder="To :" th:if="${compose.getToMail() != null}" required />
+								<input type="text" th:field="*{toMail}" class="form-control1 control3" placeholder="To :" th:if="${compose.getToMail() == null}" required />
 								<input type="text" class="form-control1 control3" th:placeholder="'From :' + ${fromMail}" disabled/>
 								<input type="text" th:field="*{subject}" class="form-control1 control3" placeholder="Subject :" autocomplete="off"/>
 								<textarea rows="6" th:field="*{body}" class="form-control1 control2" placeholder="Message :" autocomplete="off"></textarea>
