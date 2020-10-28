@@ -127,7 +127,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         </li>
 
                         <li class="treeview">
-                            <a href="#">
+                            <a >
                                 <i class="fa fa-envelope"></i> <span>Mailbox</span>
                                 <i class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">
@@ -137,7 +137,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </ul>
                         </li>
                         <li class="treeview">
-                            <a href="#">
+                            <a >
                                 <i class="fa fa-table"></i> <span>Tables</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
@@ -239,7 +239,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             Please fill details to send a new message
                         </div>
                         <form class="com-mail" th:object="${compose}" method="post" action="/admin/compose" enctype="multipart/form-data">
-                            <input type="text" th:field="*{toMail}" class="form-control1 control3" placeholder="To :"/>
+                            <input type="text" th:field="*{toMail}" class="form-control1 control3" placeholder="To :" required title=""/>
                             <input type="text" class="form-control1 control3" th:placeholder="'From :  ' +  ${fromMail}" disabled/>
                             <input type="text" th:field="*{subject}" class="form-control1 control3" placeholder="Subject :" autocomplete="off"/>
                             <textarea rows="6" th:field="*{body}" class="form-control1 control2" placeholder="Message :" autocomplete="off"></textarea>

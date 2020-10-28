@@ -22,7 +22,10 @@ public class UserContactController {
         if(session.getAttribute("userId") != null){
             long userId = (long) session.getAttribute("userId");
             User user =  userService.getUserById(userId);
+            modelMap.addAttribute("firstName", user.getFirstName());
+            modelMap.addAttribute("lastName", user.getLastName());
             List<User> userList = userService.findUsersByCorporations(user.getCorporationName());
+            userList.removeIf(user1 -> user1.getId() == userId);
             modelMap.addAttribute("userList", userList);
             return "contact-inbox";
         }

@@ -160,7 +160,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <div class="panel-heading">
                         Sent
                     </div>
-                    <div class="inbox-page">
+                    <div class="inbox-page" id="search">
 
                         <div th:each="mail :  ${mailList}" class="inbox-row widget-shadow" id="accordion" role="tablist"
                              aria-multiselectable="true">
@@ -225,7 +225,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 </div>
 
 </div>
-
+<script>
+    $(document).ready(function(){
+        $("#input-31").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#search .inbox-row ").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 <!-- side nav js -->
 <script src='/js/SidebarNav.min.js' type='text/javascript'></script>
 <script>
