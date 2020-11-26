@@ -1,7 +1,9 @@
 package com.intranet.mailingsystem.controllers.admin;
 
 import com.intranet.mailingsystem.fileconvertors.UserPDFExporter;
+import com.intranet.mailingsystem.models.Admin;
 import com.intranet.mailingsystem.models.User;
+import com.intranet.mailingsystem.service.AdminService;
 import com.intranet.mailingsystem.service.UserService;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,22 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminUserListController {
     @Autowired
+    AdminService adminService;
+    @Autowired
     UserService userService;
 
     @GetMapping("/users/list")
-    public String showUsers(ModelMap modelMap){
-        modelMap.addAttribute("userList", userService.getAllUsers());
-        return "admin-userList";
+    public String showUsers(ModelMap modelMap, HttpSession session){
+        if (session.getAttribute("adminId") != null){
+            Admin admin = adminService.getAdminById((long) session.getAttribute("adminId"));
+            modelMap.addAttribute("firstName", admin.getFirstName());
+            modelMap.addAttribute("lastName", admin.getLastName());
+            modelMap.addAttribute("userList", userService.getAllUsers());
+            return "admin-userList";
+        }
+        else {
+            return "redirect:/admin/login";
+        }
     }
 
     @GetMapping("/users/list/download")
@@ -53,6 +65,9 @@ public class AdminUserListController {
         if(session.getAttribute("adminId") != null){
             List<User> userList = userService.findUsersByCorporations(corporationName);
             modelMap.addAttribute("userList", userList);
+            Admin admin = adminService.getAdminById((long) session.getAttribute("adminId"));
+            modelMap.addAttribute("firstName", admin.getFirstName());
+            modelMap.addAttribute("lastName", admin.getLastName());
             return "admin-userList";
         }
         else {

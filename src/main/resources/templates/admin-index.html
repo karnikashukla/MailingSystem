@@ -232,8 +232,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<div class="profile_img">
 
 								<div class="user-name">
-									<p>Admin Name</p>
-									<span>Administrator</span>
+									<p th:text="${firstName}"></p>
+									<span th:text="${lastName}"></span>
 								</div>
 								<i class="fa fa-angle-down lnr"></i>
 								<i class="fa fa-angle-up lnr"></i>
@@ -269,7 +269,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					<div class="r3_counter_box">
 						<i class="pull-left fa fa-users dollar2 icon-rounded"></i>
 						<div class="stats">
-							<h5><strong>1450</strong></h5>
+							<h5><strong th:text="${userCount}"></strong></h5>
 							<span>Total Users</span>
 						</div>
 					</div>

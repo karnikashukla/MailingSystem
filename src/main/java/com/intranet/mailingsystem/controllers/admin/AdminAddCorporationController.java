@@ -4,6 +4,7 @@ import com.intranet.mailingsystem.models.Admin;
 import com.intranet.mailingsystem.models.Corporation;
 import com.intranet.mailingsystem.repositories.CorporationRepository;
 import com.intranet.mailingsystem.sequencegenerator.SequenceGeneratorService;
+import com.intranet.mailingsystem.service.AdminService;
 import com.intranet.mailingsystem.service.CorporationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/admin")
 public class AdminAddCorporationController {
-
+    @Autowired
+    AdminService adminService;
     @Autowired
     CorporationService corporationService;
     @Autowired
@@ -28,6 +30,9 @@ public class AdminAddCorporationController {
     public String displayAddCorporationsPage(ModelMap modelMap, HttpSession session){
         if (session.getAttribute("adminId") != null)
         {
+            Admin admin = adminService.getAdminById((long) session.getAttribute("adminId"));
+            modelMap.addAttribute("firstName", admin.getFirstName());
+            modelMap.addAttribute("lastName", admin.getLastName());
             modelMap.addAttribute("newCorporation", new Corporation());
             return "forms";
         }

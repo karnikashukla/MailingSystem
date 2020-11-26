@@ -2,8 +2,10 @@ package com.intranet.mailingsystem.controllers.admin;
 
 import com.intranet.mailingsystem.fileconvertors.CorporationPDFExporter;
 import com.intranet.mailingsystem.fileconvertors.UserPDFExporter;
+import com.intranet.mailingsystem.models.Admin;
 import com.intranet.mailingsystem.models.Corporation;
 import com.intranet.mailingsystem.models.User;
+import com.intranet.mailingsystem.service.AdminService;
 import com.intranet.mailingsystem.service.CorporationService;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +27,18 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminDomainListController {
     @Autowired
+    AdminService adminService;
+    @Autowired
     CorporationService corporationService;
 
     @GetMapping("/corporations/list")
     public String showCorporations(ModelMap modelMap, HttpSession session){
         if (session.getAttribute("adminId") != null){
+            Admin admin = adminService.getAdminById((long) session.getAttribute("adminId"));
+            modelMap.addAttribute("firstName", admin.getFirstName());
+            modelMap.addAttribute("lastName", admin.getLastName());
             modelMap.addAttribute("corporationList", corporationService.findAllCorporation());
+
             return "admin-domainList";
         }
         else {
