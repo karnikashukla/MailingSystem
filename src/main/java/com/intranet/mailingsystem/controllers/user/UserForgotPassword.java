@@ -48,7 +48,7 @@ public class UserForgotPassword {
         helper.setTo(alternateEmail);
         helper.setFrom("karanbhatt512@gmail.com");
         helper.setSubject("Mailing System - Change password requested");
-        String msg = "<html lang='en'><body><p>You are getting this email to change your password. </p> <br> OTP :"+ formatted +"<br> This OTP is valid for 30 minutes. <p>If you have not requested to change password, Ignore this email.</p><p>Regards,</p><p>Cohape Team.</p></body></html>";
+        String msg = "<html lang='en'><body><p>You are getting this email to change your password. </p> <br> OTP :"+ formatted +"<br> This OTP is valid for 30 minutes. <p>If you have not requested to change password, Ignore this email.</p><p>Regards,</p><p>Intranet Mailing System Team.</p></body></html>";
 
         //Context ctx = new Context();
         //final String htmlContent = this.templateEngine.process("change-password.html", ctx);

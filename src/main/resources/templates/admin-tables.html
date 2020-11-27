@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <title>Tables</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +50,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<h1><a class="navbar-brand" href="/ds"><span class="fa fa-envelope"></span> Mailbox<span class="dashboard_text">Inbox</span></a></h1>
+						<h1><a class="navbar-brand" href="/"><span class="fa fa-envelope"></span> Mailbox<span class="dashboard_text">Inbox</span></a></h1>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="sidebar-menu">
@@ -127,20 +127,20 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					<ul>
 						<li class="dropdown profile_details_drop">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-								<div class="profile_img">	
+								<div class="profile_img">
 
 									<div class="user-name">
-										<p>Admin Name</p>
-										<span>Administrator</span>
+										<p th:text="${firstName}"></p>
+										<span th:text="${lastName}"></span>
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
 									<i class="fa fa-angle-up lnr"></i>
-									<div class="clearfix"></div>	
-								</div>	
+									<div class="clearfix"></div>
+								</div>
 							</a>
 							<ul class="dropdown-menu drp-mnu">
-<!--								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li> -->
-								<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+								<!--								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li> -->
+								<li> <a href="/admin/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							</ul>
 						</li>
 					</ul>

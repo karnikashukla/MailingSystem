@@ -192,7 +192,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<p th:text="${mail.getBody()}"></p>
 								<div th:if="${mail.getDocuments()!=null}">
 								<li th:each="document, stat : ${mail.getDocuments()}">
-									<a th:href="'/download/' + ${mail.getId()} + '/' +${stat.index}"> download</a>
+									<a th:href="'/download/' + ${mail.getId()} + '/' +${stat.index}"> <p th:text="${#strings.substring(mail.getDocuments(), 39,#strings.length(mail.getDocuments())-1)}"></p> download</a>
 								</li>
 								</div>
 								<a th:href="@{'/users/send/' + ${mail.getFromMail()}}">Reply</a>

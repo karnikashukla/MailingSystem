@@ -56,7 +56,7 @@ public class CorporationPDFExporter {
         font.setSize(18);
         font.setColor(Color.BLACK);
 
-        Paragraph p = new Paragraph("List of Users", font);
+        Paragraph p = new Paragraph("List of Domains", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
 
         document.add(p);
